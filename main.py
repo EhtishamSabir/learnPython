@@ -1,33 +1,63 @@
-import pandas as pd
-import ggplot
-import util
+import logging
+import sys
+import string
 
-def lineplot(hr_year_csv):
-    # A csv file will be passed in as an argument which
-    # contains two columns -- 'HR' (the number of homerun hits)
-    # and 'yearID' (the year in which the homeruns were hit).
-    #
-    # Fill out the body of this function, lineplot, to use the
-    # passed-in csv file, hr_year.csv, and create a
-    # chart with points connected by lines, both colored 'red',
-    # showing the number of HR by year.
-    #
-    # You will want to first load the csv file into a pandas dataframe
-    # and use the pandas dataframe along with ggplot to create your visualization
-    #
-    # You can check out the data in the csv file at the link below:
-    # https://s3.amazonaws.com/content.udacity-data.com/courses/ud359/hr_year.csv
-    #
-    # You can read more about ggplot at the following link:
-    # https://github.com/yhat/ggplot/
-
-    data = pd.read_csv(hr_year_csv)
-    gg = ggplot.ggplot(data, ggplot.aes('HR', 'yearID')) + \
-         ggplot.geom_point(color='red') + ggplot.geom_line(
-        color='red') + ggplot.ggtitle(
-        'Number of HR by year') + ggplot.xlab('HR') + ggplot.ylab('yearID')
-    return gg
+logging.basicConfig(filename="loggger.log", format='%(message)s',
+                    level=logging.INFO, filemode='w')
 
 
-if __name__ == '__main__':
-    print(lineplot("5/hr_year.csv"))
+def word_count():
+    # For this exercise, write a program that serially counts the number of occurrences
+    # of each word in the book Alice in Wonderland.
+    #
+    # The text of Alice in Wonderland will be fed into your program line-by-line.
+    # Your program needs to take each line and do the following:
+    # 1) Tokenize the line into string tokens by whitespace
+    #    Example: "Hello, World!" should be converted into "Hello," and "World!"
+    #    (This part has been done for you.)
+    #
+    # 2) Remove all punctuation
+    #    Example: "Hello," and "World!" should be converted into "Hello" and "World"
+    #
+    # 3) Make all letters lowercase
+    #    Example: "Hello" and "World" should be converted to "hello" and "world"
+    #
+    # Store the the number of times that a word appears in Alice in Wonderland
+    # in the word_counts dictionary, and then *print* (don't return) that dictionary
+    #
+    # In this exercise, print statements will be considered your final output. Because
+    # of this, printing a debug statement will cause the grader to break. Instead,
+    # you can use the logging module which we've configured for you.
+    #
+    # For example:
+    # logging.info("My debugging message")
+    #
+    # The logging module can be used to give you more control over your
+    # debugging or other messages than you can get by printing them. Messages
+    # logged via the logger we configured will be saved to a
+    # file. If you click "Test Run", then you will see the contents of that file
+    # once your program has finished running.
+    #
+    # The logging module also has other capabilities; see
+    # https://docs.python.org/2/library/logging.html
+    # for more information.
+
+    word_counts = {}
+    exclude = set(string.punctuation)
+
+    for line in sys.stdin:
+        data = line.strip().split(" ")
+        for word in data:
+            word_l = word.lower()
+            word_l = ''.join(ch for ch in word_l if ch not in exclude)
+            logging.info(word_l)
+            if word_l in word_counts:
+                logging.info(word.lower())
+                word_counts[word_l] += 1
+            else:
+                word_counts[word_l] = 1
+            logging.info( word_counts[word_l])
+    print(word_counts)
+
+
+word_count()
