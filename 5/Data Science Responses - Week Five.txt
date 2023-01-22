@@ -1,6 +1,6 @@
-Data Science – Learning Management Questions
-Week Five – Question #1   
-    from pandas import *
+Data Science ï¿½ Learning Management Questions
+Week Five ï¿½ Question #1
+from pandas import *
 from ggplot import *
 
 import pandas
@@ -28,7 +28,7 @@ def lineplot(hr_year_csv):
     return gg
 
 
-Week Five   – Question #2   
+Week Five   ï¿½ Question #2   
 import pandas
 from ggplot import *
 
@@ -52,9 +52,9 @@ def lineplot_compare(hr_by_team_year_sf_la_csv):
     # in this exercise.
         gg = #YOUR CODE GOES HERE
     return gg
-Week Five – Question #3   
+Week Five ï¿½ Question #3   
 
 
-Week Five – Question #4   
+Week Five ï¿½ Question #4   
 
-Week Five – Question #5   
+Week Five ï¿½ Question #5   
