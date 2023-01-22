@@ -4,8 +4,8 @@ import sys
 import string
 import logging
 
-from util import mapper_logfile
-logging.basicConfig(filename=mapper_logfile, format='%(message)s',
+
+logging.basicConfig(filename="logger.log", format='%(message)s',
                     level=logging.INFO, filemode='w')
 
 def mapper():
@@ -50,8 +50,8 @@ import sys
 import string
 import logging
 
-from util import mapper_logfile
-logging.basicConfig(filename=mapper_logfile, format='%(message)s',
+
+logging.basicConfig(filename="logger.log", format='%(message)s',
                     level=logging.INFO, filemode='w')
 
 def mapper():
@@ -106,8 +106,8 @@ import sys
 import string
 import logging
 
-from util import mapper_logfile
-logging.basicConfig(filename=mapper_logfile, format='%(message)s',
+
+logging.basicConfig(filename="logger.log", format='%(message)s',
                     level=logging.INFO, filemode='w')
 
 def mapper():
