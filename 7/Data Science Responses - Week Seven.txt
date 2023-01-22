@@ -1,5 +1,5 @@
-Data Science – Learning Management Questions
-Week Seven  – Question #1   
+Data Science ï¿½ Learning Management Questions
+Week Seven  ï¿½ Question #1   
 import sys
 import string
 import logging
@@ -37,10 +37,15 @@ def mapper():
     https://docs.python.org/2/library/logging.html for more information.
     """
 
+
     for line in sys.stdin:
-        # your code here
+        data = line.strip().split(',')
+        if len(data) != 22 or data[1] == 'UNIT':
+            continue
+        print "{0}\t{1}".format(data[1], data[6])
+    logging.info(len(data))
 mapper()
-Week Seven    – Question #2   
+Week Seven    ï¿½ Question #2   
 import sys
 import string
 import logging
@@ -90,10 +95,13 @@ def mapper():
         )
 
     for line in sys.stdin:
-    	# your code here
+    	data = line.strip().split(',')
+        if len(data) != 22 or data[1] == 'UNIT':
+            continue
+        print("{0}\t{1}".format(format_key(float(data[14]), float(data[15])), data[6])
 
 mapper()
-Week Seven  – Question #3   
+Week Seven  ï¿½ Question #3   
 import sys
 import string
 import logging
@@ -125,9 +133,12 @@ def mapper():
     """
 
     for line in sys.stdin:
-        # your code here
+        data = line.strip().split(',')
+        if len(data) != 22 or data[1] == 'UNIT':
+            continue
+        print("{0}\t{1}\t{2}\t{3}".format(data[1], data[6], data[2], data[3])
 
 mapper()
-Week Six – Question #4   
+Week Six ï¿½ Question #4   
 
 
