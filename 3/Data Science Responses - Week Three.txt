@@ -35,6 +35,18 @@ def compare_averages(filename):
     (True, (9.93570222, 0.000023))
     """
 
+    baseball=pandas.read_csv(filename)
+    left=baseball["avg"][baseball["handedness"]=="L"]
+    right=baseball["avg"][baseball["handedness"]=="R"]
+    
+    (t,pvalue)=scipy.stats.ttest_ind(left,right,equal_var=False)
+    print(pvalue)
+    if pvalue<=0.05:
+        return (False,(t,pvalue))
+    return (True,(t,pvalue))
+
+
+
 Week Three  – Question #2   
 import numpy
 import pandas
@@ -60,12 +72,16 @@ def gradient_descent(features, values, theta, alpha, num_iterations):
     # to cost_history.
     # See the Instructor notes for hints. 
     
+    m = len(values)
     cost_history = []
+    for i in range(num_iterations):
+        predicted_values = numpy.dot(features, theta)
+        theta = theta - alpha/m *numpy.dot((predicted_values - values), features)
+        cost = compute_cost(features, values, theta) 
+        cost_history.append(cost)
 
-    ###########################
-    ### YOUR CODE GOES HERE ###
-    ###########################
 
+    return theta, pandas.Series(cost_history)
 Week Three – Question #3   
 import numpy as np
 
@@ -77,7 +93,8 @@ def compute_r_squared(data, predictions):
     # Numpy has a couple of functions -- np.mean() and np.sum() --
     # that you might find useful, but you don't have to use them.
 
-    # YOUR CODE GOES HERE
+    r_squared = 1-np.sum((data-predictions)**2)/np.sum((data-np.mean(data))**2)
+
 
     return r_squared
 
