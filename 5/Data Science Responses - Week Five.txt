@@ -36,8 +36,9 @@ def lineplot(hr_year_csv):
 
 
 Week Five   – Question #2
-import pandas
+from pandas import *
 from ggplot import *
+
 
 def lineplot_compare(hr_by_team_year_sf_la_csv):
     # Write a function, lineplot_compare, that will read a csv file
@@ -58,7 +59,7 @@ def lineplot_compare(hr_by_team_year_sf_la_csv):
     # ggplot(data, aes(xvar, yvar, color=category_var)). This might help you
     # in this exercise.
     data = read_csv(hr_by_team_year_sf_la_csv)
-    df = DataFrame(data)
-    gg = ggplot(df, aes('HR','yearID',color='teamID')) + geom_point() + geom_line() + ggtitle('Number of HR by year') + xlab('HR') + ylab('yearID')
-
+    gg = ggplot(data, aes('HR','yearID')) + geom_point(color = 'red') + geom_line(color = 'red') + ggtitle('Number of HR by year') + xlab('HR') + ylab('yearID')
     return gg
+
+

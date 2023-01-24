@@ -1,50 +1,30 @@
-import sys
-import string
-import logging
 
-logging.basicConfig(filename="logger.log", format='%(message)s',
-                    level=logging.INFO, filemode='w')
+from ggplot import *
+from pandas import DataFrame, read_csv
 
 
-def mapper():
-    # Also make sure to fill out the reducer code before clicking "Test Run" or "Submit".
-
-    # Each line will be a comma-separated list of values. The
-    # header row WILL be included. Tokenize each row using the
-    # commas, and emit (i.e. print) a key-value pair containing the
-    # district (not state) and Aadhaar generated, separated by a tab.
-    # Skip rows without the correct number of tokens and also skip
-    # the header row.
-
-    # You can see a copy of the the input Aadhaar data
-    # in the link below:
-    # https://www.dropbox.com/s/vn8t4uulbsfmalo/aadhaar_data.csv
-
-    # Since you are printing the output of your program, printing a debug
-    # statement will interfere with the operation of the grader. Instead,
-    # use the logging module, which we've configured to log to a file printed
-    # when you click "Test Run". For example:
-    # logging.info("My debugging message")
+def lineplot_compare(hr_by_team_year_sf_la_csv):
+    # Write a function, lineplot_compare, that will read a csv file
+    # called hr_by_team_year_sf_la.csv and plot it using pandas and ggplot.
     #
-    # Note that, unlike print, logging.info will take only a single argument.
-    # So logging.info("my message") will work, but logging.info("my","message") will not.
+    # This csv file has three columns: yearID, HR, and teamID. The data in the
+    # file gives the total number of home runs hit each year by the SF Giants
+    # (teamID == 'SFN') and the LA Dodgers (teamID == "LAN"). Produce a
+    # visualization comparing the total home runs by year of the two teams.
+    #
+    # You can see the data in hr_by_team_year_sf_la_csv
+    # at the link below:
+    # https://s3.amazonaws.com/content.udacity-data.com/courses/ud359/hr_by_team_year_sf_la.csv
+    #
+    # Note that to differentiate between multiple categories on the
+    # same plot in ggplot, we can pass color in with the other arguments
+    # to aes, rather than in our geometry functions. For example,
+    # ggplot(data, aes(xvar, yvar, color=category_var)). This might help you
+    # in this exercise.
+    data = read_csv(hr_by_team_year_sf_la_csv)
+    df = DataFrame(data)
+    gg = ggplot(df, aes('HR','yearID',color='yearID')) + geom_point() + geom_line() + ggtitle('Number of HR by year') + \
+         xlab('HR') + ylab('yearID')
 
-    header = True
-    colnum = 12
-    col_district = 3  # col 4 District
-    col_addhaargen = 8  # col 9 Aadhaar generated
-    for line in sys.stdin:
-        if header:
-            header = False
-            continue
-
-        data = line.strip().split(",")
-
-        if len(data) != colnum:
-            continue
-
-        result = '{0}\t{1}'.format(data[col_district], data[col_addhaargen])
-        print(result)
-
-
-mapper()
+    return gg
+lineplot_compare("hr_year.csv")
